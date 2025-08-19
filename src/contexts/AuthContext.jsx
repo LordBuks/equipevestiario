@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { 
-  signInWithEmailAndPassword, 
-  signOut, 
+import {
+  signInWithEmailAndPassword,
+  signOut,
   onAuthStateChanged,
-  createUserWithEmailAndPassword 
+  createUserWithEmailAndPassword
 } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase'; // Importar db do firebase.js
+import { doc, getDoc } from 'firebase/firestore'; // Importar funções do Firestore
 
 const AuthContext = createContext();
 
@@ -24,6 +25,15 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
+      // Após o login, buscar dados adicionais do usuário
+      const user = result.user;
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+      if (userDocSnap.exists()) {
+        setCurrentUser({ ...user, ...userDocSnap.data() });
+      } else {
+        setCurrentUser(user);
+      }
       return result;
     } catch (error) {
       throw error;
@@ -41,6 +51,8 @@ export const AuthProvider = ({ children }) => {
   const register = async (email, password) => {
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
+      // Após o registro, você pode querer criar um documento de usuário no Firestore aqui
+      setCurrentUser(result.user);
       return result;
     } catch (error) {
       throw error;
@@ -48,8 +60,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // Se o usuário estiver logado, buscar dados adicionais
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          setCurrentUser({ ...user, ...userDocSnap.data() });
+        } else {
+          setCurrentUser(user);
+        }
+      } else {
+        setCurrentUser(null);
+      }
       setLoading(false);
     });
 
@@ -70,4 +93,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
 

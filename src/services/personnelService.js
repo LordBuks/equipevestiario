@@ -1,12 +1,12 @@
-import { 
-  collection, 
-  addDoc, 
-  getDocs, 
-  doc, 
-  updateDoc, 
-  deleteDoc, 
-  query, 
-  where, 
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
   orderBy,
   getDoc,
   arrayUnion,
@@ -15,7 +15,7 @@ import {
 import { db } from '../firebase';
 import { cloudinaryService } from './cloudinaryService';
 
-// Coleção unificada de pessoal
+// Coleções existentes no Firebase
 const PERSONNEL_COLLECTION = 'personnel';
 
 // Operações CRUD para pessoal
@@ -23,15 +23,13 @@ export const personnelService = {
   // Buscar todo o pessoal
   async getAll() {
     try {
-      const querySnapshot = await getDocs(
-        query(collection(db, PERSONNEL_COLLECTION), orderBy('name'))
-      );
+      const querySnapshot = await getDocs(query(collection(db, PERSONNEL_COLLECTION), orderBy("name")));
       return querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
     } catch (error) {
-      console.error('Erro ao buscar pessoal:', error);
+      console.error("Erro ao buscar pessoal:", error);
       throw error;
     }
   },
@@ -56,7 +54,7 @@ export const personnelService = {
     }
   },
 
-  // Buscar pessoal por tipo (Especial, Agente, Monitor)
+  // Buscar pessoal por tipo (Especial, Agente)
   async getByType(type) {
     try {
       const q = query(
@@ -299,9 +297,10 @@ export const personnelUtils = {
 
   // Obter lista de tipos disponíveis
   getAvailableTypes() {
-    return ['Especial', 'Agente', 'Monitor'];
+    return ["Especial", "Agente"];
   }
 };
 
 export default personnelService;
+
 

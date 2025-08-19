@@ -13,12 +13,11 @@ const Footer = () => {
           />
         </div>
         <div className="footer-text">
-          <p className="footer-title">
+          <div className="footer-title">
             <p>Gestão de Agentes de Segurança</p>
             <p>Equipe do Vestiário</p>
-            <p></p>
-            <p class="text-xs text-gray-500 mt-4">© 2025 TechVamp</p>
-          </p>
+            <p className="text-xs text-gray-500 mt-4">© 2025 TechVamp</p>
+          </div>
           <p className="footer-department"></p>
         </div>
       </div>

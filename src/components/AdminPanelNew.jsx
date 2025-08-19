@@ -27,7 +27,7 @@ const AdminPanelNew = ({ onBackToPublic }) => {
   const [editingStory, setEditingStory] = useState(null);
   const [error, setError] = useState('');
 
-  const types = ['Especiais', 'Agentes', 'Monitores'];
+  const types = ['Especiais', 'Agentes']; // Removido 'Monitores'
 
   useEffect(() => {
     loadData();
@@ -173,12 +173,15 @@ const AdminPanelNew = ({ onBackToPublic }) => {
               <h1 className="text-3xl font-bold text-gray-900">Painel Administrativo</h1>
               <p className="text-gray-600">Gerencie pessoal e histórias</p>
             </div>
-            <button
-              onClick={onBackToPublic}
-              className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-            >
-              Voltar ao Site
-            </button>
+            {/* Botão Voltar ao Site alinhado com o centro dos ícones Pessoal e Histórias */}
+            <div className="flex-grow flex justify-center items-center">
+              <button
+                onClick={onBackToPublic}
+                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                Voltar ao Site
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -252,13 +255,7 @@ const AdminPanelNew = ({ onBackToPublic }) => {
                   ))}
                 </select>
               </div>
-              <button
-                onClick={handleAddPersonnel}
-                className="flex items-center space-x-2 px-4 py-2 bg-[#E5050F] text-white rounded-lg hover:bg-[#C5040E] transition-colors"
-              >
-                <Plus size={20} />
-                <span>Adicionar Pessoa</span>
-              </button>
+              {/* Removido o botão 'Adicionar Pessoa' aqui */}
             </div>
 
             {/* Personnel Grid */}
@@ -416,23 +413,16 @@ const AdminPanelNew = ({ onBackToPublic }) => {
       {showPersonnelForm && (
         <PersonnelForm
           person={editingPersonnel}
-          onSubmit={handlePersonnelSubmit}
-          onCancel={() => {
-            setShowPersonnelForm(false);
-            setEditingPersonnel(null);
-          }}
-          mode={editingPersonnel ? 'edit' : 'add'}
+          onSuccess={handlePersonnelSubmit}
+          onClose={() => setShowPersonnelForm(false)}
         />
       )}
 
       {showStoryForm && (
         <PlayerStoryForm
           story={editingStory}
-          onSubmit={handleStorySubmit}
-          onCancel={() => {
-            setShowStoryForm(false);
-            setEditingStory(null);
-          }}
+          onSuccess={handleStorySubmit}
+          onClose={() => setShowStoryForm(false)}
         />
       )}
     </div>
@@ -440,4 +430,5 @@ const AdminPanelNew = ({ onBackToPublic }) => {
 };
 
 export default AdminPanelNew;
+
 

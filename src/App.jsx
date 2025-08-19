@@ -4,19 +4,17 @@ import Header from './components/Header';
 import CategoryMenu from './components/CategoryMenu';
 import PlayerGrid from './components/PlayerGrid';
 import PlayerModalWithTabs from './components/PlayerModalWithTabs';
-import EmployeesPage from './components/EmployeesPage';
-import AdminPanelWithStories from './components/AdminPanelWithStories';
+import EmployeesPageNew from './components/EmployeesPageNew'; // Novo componente
+import AdminPanelNew from './components/AdminPanelNew'; // Novo componente
 import Login from './components/Login';
 import WelcomeScreen from './components/WelcomeScreen';
 import LoggedInWelcome from './components/LoggedInWelcome';
-import { usePlayers } from './hooks/usePlayers';
-import { useEmployees } from './hooks/useEmployees';
+import { usePersonnel } from './hooks/usePersonnel'; // Novo hook unificado
 import './App.css';
 
 function AppContent() {
   const { currentUser, loading: authLoading, logout } = useAuth();
-  const { players, loading: playersLoading, error, getPlayersByCategory } = usePlayers();
-  const { employees, loading: employeesLoading, error: employeesError, getEmployeesByFunction } = useEmployees();
+  const { personnel, loading: personnelLoading, error, getPersonnelByType, getPersonnelByAssignment } = usePersonnel();
 
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [isPlayerModalOpen, setIsPlayerModalOpen] = useState(false);
@@ -29,14 +27,16 @@ function AppContent() {
   // Atualizar categoria quando mudar para página de funcionários ou painel admin
   useEffect(() => {
     if (showEmployeesPage) {
-      setSelectedCategory("Monitores");
+      setSelectedCategory("Visitantes"); // Categoria padrão para funcionários
     } else if (!showAdminPanel) {
-      setSelectedCategory("Sub20");
+      setSelectedCategory("Sub20"); // Categoria padrão para jogadores
     }
   }, [showEmployeesPage, showAdminPanel]);
 
-  const filteredPlayers = getPlayersByCategory(selectedCategory);
-  const filteredEmployees = getEmployeesByFunction(selectedCategory);
+  // Filtrar pessoal para PlayerGrid (Especiais/Agentes)
+  const filteredPlayers = getPersonnelByType(selectedCategory === "Sub20" ? "Agente" : selectedCategory);
+  // Filtrar pessoal para EmployeesPage (Monitores/Setores)
+  const filteredEmployees = getPersonnelByAssignment(selectedCategory);
 
   const handlePlayerClick = (player) => {
     setSelectedPlayer(player);
@@ -85,7 +85,7 @@ function AppContent() {
   }
 
   // Se a autenticação ou os dados estiverem carregando, exibe a tela de carregamento
-  if (authLoading || playersLoading || employeesLoading) {
+  if (authLoading || personnelLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
@@ -111,13 +111,13 @@ function AppContent() {
 
   // Se o usuário estiver logado e showAdminPanel for verdadeiro, exibe o painel administrativo
   if (currentUser && showAdminPanel) {
-    return <AdminPanelWithStories onBackToPublic={handleBackToPublic} />;
+    return <AdminPanelNew onBackToPublic={handleBackToPublic} />;
   }
 
   // Se o usuário estiver logado e showEmployeesPage for verdadeiro, exibe a página de funcionários
   if (currentUser && showEmployeesPage) {
     return (
-      <EmployeesPage 
+      <EmployeesPageNew 
         onAdminClick={handleAdminClick}
         onBackToWelcome={() => setShowWelcomeBack(true)}
       />
@@ -135,6 +135,9 @@ function AppContent() {
         <CategoryMenu 
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
+          // As categorias agora podem ser dinâmicas ou fixas, dependendo do que você quer exibir na tela principal
+          // Por exemplo, se a tela principal for apenas para 'Agentes' e 'Especiais'
+          categories={["Especiais", "Agentes"]}
         />
         
         {error && (
@@ -174,5 +177,4 @@ function App() {
 }
 
 export default App;
-
 

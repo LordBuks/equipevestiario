@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X, Upload, User, Trash2 } from 'lucide-react';
-import { personnelUtils, personnelStorageService } from '../services/personnelService';
-
-const PersonnelForm = ({ person, onSubmit, onCancel, mode = 'add' }) => {
+import { personnelUtils, personnelStorageService } from '../services/personnelService';const PersonnelForm = ({ person, onSuccess, onCancel, mode = 'add' }) => {
   const [formData, setFormData] = useState({
     name: '',
     fullName: '',
@@ -174,7 +172,7 @@ const PersonnelForm = ({ person, onSubmit, onCancel, mode = 'add' }) => {
         personnelData.photoData = null;
       }
 
-      await onSubmit(personnelData);
+      await onSuccess(personnelData);;;
     } catch (error) {
       console.error('Erro ao salvar pessoal:', error);
       setErrors(['Erro ao salvar dados. Tente novamente.']);

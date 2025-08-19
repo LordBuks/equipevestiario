@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { Plus } from 'lucide-react';
 import Header from './Header';
 import CategoryMenu from './CategoryMenu';
 import EmployeeGrid from './EmployeeGrid';
 import EmployeeModal from './EmployeeModal';
 import PersonnelSelector from './PersonnelSelector';
 import { usePersonnel } from '../hooks/usePersonnel';
+import { useAuth } from '../contexts/AuthContext';
 
 const EmployeesPageNew = ({ onAdminClick, onBackToWelcome }) => {
+  const { currentUser } = useAuth();
   const { 
     personnel, 
     loading: personnelLoading, 
@@ -41,19 +42,20 @@ const EmployeesPageNew = ({ onAdminClick, onBackToWelcome }) => {
     }
   };
 
-  const handleAddAgentToPost = () => {
-    setIsPersonnelSelectorOpen(true);
-  };
+  // Estas funções não serão mais chamadas diretamente por botões nesta página
+  // const handleAddAgentToPost = () => {
+  //   setIsPersonnelSelectorOpen(true);
+  // };
 
-  const handlePersonnelSelect = async (person) => {
-    try {
-      await addAssignment(person.id, selectedCategory);
-      setIsPersonnelSelectorOpen(false);
-    } catch (error) {
-      console.error('Erro ao adicionar agente ao posto:', error);
-      alert('Erro ao adicionar agente ao posto. Tente novamente.');
-    }
-  };
+  // const handlePersonnelSelect = async (person) => {
+  //   try {
+  //     await addAssignment(person.id, selectedCategory);
+  //     setIsPersonnelSelectorOpen(false);
+  //   } catch (error) {
+  //     console.error('Erro ao adicionar agente ao posto:', error);
+  //     alert('Erro ao adicionar agente ao posto. Tente novamente.');
+  //   }
+  // };
 
   if (personnelLoading) {
     return (
@@ -78,7 +80,7 @@ const EmployeesPageNew = ({ onAdminClick, onBackToWelcome }) => {
               Setores
             </h1>
             <p className="text-lg text-gray-600">
-              Gerencie os postos de serviço.
+              Visualize a distribuição de agentes por posto.
             </p>
           </div>
         </div>
@@ -100,17 +102,6 @@ const EmployeesPageNew = ({ onAdminClick, onBackToWelcome }) => {
       )}
       
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* Botão para adicionar agente existente ao posto */}
-        <div className="mb-6 flex justify-end">
-          <button
-            onClick={handleAddAgentToPost}
-            className="flex items-center space-x-2 px-4 py-2 bg-[#E5050F] text-white rounded-lg hover:bg-[#C5040E] transition-colors"
-          >
-            <Plus size={20} />
-            <span>Adicionar Agente ao Posto</span>
-          </button>
-        </div>
-
         {filteredEmployees.length === 0 ? (
           <div className="text-center py-12">
             <div className="bg-white rounded-lg shadow-sm p-8">
@@ -120,13 +111,6 @@ const EmployeesPageNew = ({ onAdminClick, onBackToWelcome }) => {
               <p className="text-gray-600 mb-4">
                 Não há agentes cadastrados na categoria "{selectedCategory}" no momento.
               </p>
-              <button
-                onClick={handleAddAgentToPost}
-                className="inline-flex items-center space-x-2 px-4 py-2 bg-[#E5050F] text-white rounded-lg hover:bg-[#C5040E] transition-colors"
-              >
-                <Plus size={20} />
-                <span>Adicionar Primeiro Agente</span>
-              </button>
             </div>
           </div>
         ) : (
@@ -143,16 +127,18 @@ const EmployeesPageNew = ({ onAdminClick, onBackToWelcome }) => {
         onClose={handleCloseEmployeeModal}
       />
 
-      <PersonnelSelector
+      {/* O PersonnelSelector será chamado apenas do AdminPanelNew agora */}
+      {/* <PersonnelSelector
         isOpen={isPersonnelSelectorOpen}
         onClose={() => setIsPersonnelSelectorOpen(false)}
         onSelect={handlePersonnelSelect}
         availablePersonnel={availablePersonnel}
         assignment={selectedCategory}
-      />
+      /> */}
     </div>
   );
 };
 
 export default EmployeesPageNew;
+
 
