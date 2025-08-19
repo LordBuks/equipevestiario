@@ -1,0 +1,219 @@
+/* Login.css - Versão otimizada para evitar rolagem lateral */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FFFFFF 0%, #e8e8e8 100%);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Arial', sans-serif;
+}
+
+.login-header {
+  text-align: center;
+  padding: 2rem 1rem 1rem; /* ALTERADO: De 32px 16px 16px para rem para melhor escalabilidade */
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo-container {
+  margin-bottom: 1rem; /* ALTERADO: De 16px para rem para melhor escalabilidade */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo {
+  width: 4rem; /* ALTERADO: De 64px para rem para melhor escalabilidade */
+  height: 4rem; /* ALTERADO: De 64px para rem para melhor escalabilidade */
+  border-radius: 50%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.system-title {
+  color: #d32f2f;
+  font-size: 1.375rem; /* ALTERADO: De 22px para rem para melhor escalabilidade */
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+}
+
+.login-form-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem; /* ALTERADO: De 32px 16px para rem para melhor escalabilidade */
+}
+
+.login-form-wrapper {
+  background: white;
+  padding: 2rem; /* ALTERADO: De 32px para rem para melhor escalabilidade */
+  border-radius: 0.75rem; /* ALTERADO: De 12px para rem para melhor escalabilidade */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 31.25rem; /* ALTERADO: De 500px para rem para melhor escalabilidade */
+  border: 1px solid #e0e0e0;
+}
+
+.login-title {
+  color: #d32f2f;
+  font-size: 1.25rem; /* ALTERADO: De 20px para rem para melhor escalabilidade */
+  font-weight: bold;
+  margin: 0 0 1.5rem 0; /* ALTERADO: De 24px para rem para melhor escalabilidade */
+  text-align: left;
+  border-bottom: 3px solid #d32f2f;
+  padding-bottom: 0.5rem; /* ALTERADO: De 8px para rem para melhor escalabilidade */
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* ALTERADO: De 16px para rem para melhor escalabilidade */
+  margin-bottom: 1.5rem; /* ALTERADO: De 24px para rem para melhor escalabilidade */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem; /* ALTERADO: De 6px para rem para melhor escalabilidade */
+}
+
+.form-label {
+  color: #333;
+  font-weight: 600;
+  font-size: 0.8125rem; /* ALTERADO: De 13px para rem para melhor escalabilidade */
+  margin-bottom: 0.25rem; /* ALTERADO: De 4px para rem para melhor escalabilidade */
+}
+
+.form-input {
+  padding: 0.625rem 0.875rem; /* ALTERADO: De 10px 14px para rem para melhor escalabilidade */
+  border: 2px solid #ddd;
+  border-radius: 0.375rem; /* ALTERADO: De 6px para rem para melhor escalabilidade */
+  font-size: 0.875rem; /* ALTERADO: De 14px para rem para melhor escalabilidade */
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #d32f2f;
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+}
+
+.form-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 0.625rem; /* ALTERADO: De 10px para rem para melhor escalabilidade */
+  border-radius: 0.375rem; /* ALTERADO: De 6px para rem para melhor escalabilidade */
+  border: 1px solid #ffcdd2;
+  font-size: 0.8125rem; /* ALTERADO: De 13px para rem para melhor escalabilidade */
+  text-align: center;
+}
+
+.login-button {
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem; /* ALTERADO: De 12px 20px para rem para melhor escalabilidade */
+  border-radius: 0.375rem; /* ALTERADO: De 6px para rem para melhor escalabilidade */
+  font-size: 0.875rem; /* ALTERADO: De 14px para rem para melhor escalabilidade */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem; /* ALTERADO: De 8px para rem para melhor escalabilidade */
+  text-transform: uppercase;
+  letter-spacing: 0.03125rem; /* ALTERADO: De 0.5px para rem para melhor escalabilidade */
+}
+
+.login-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #b71c1c 0%, #8e0000 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+.login-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.login-footer {
+  background: #f5f5f5;
+  padding: 1rem; /* ALTERADO: De 16px para rem para melhor escalabilidade */
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 2rem; /* ALTERADO: De 32px para rem para melhor escalabilidade */
+}
+
+.login-footer p {
+  margin: 0;
+  color: #666;
+  font-size: 0.6875rem; /* ALTERADO: De 11px para rem para melhor escalabilidade */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .login-header {
+    padding: 1rem 0.75rem 0.75rem; /* ALTERADO: De 16px 12px 12px para rem para melhor escalabilidade */
+  }
+  
+  .system-title {
+    font-size: 1.125rem; /* ALTERADO: De 18px para rem para melhor escalabilidade */
+  }
+  
+  .logo {
+    width: 3rem; /* ALTERADO: De 48px para rem para melhor escalabilidade */
+    height: 3rem; /* ALTERADO: De 48px para rem para melhor escalabilidade */
+  }
+  
+  .login-form-wrapper {
+    padding: 1.5rem 1rem 0 1rem; /* ALTERADO: De 24px 16px 0 16px para rem para melhor escalabilidade */
+    margin: 0 0.75rem; /* ALTERADO: De 12px para rem para melhor escalabilidade */
+    max-width: 22.5rem; /* ALTERADO: De 360px para rem para melhor escalabilidade */
+  }
+  
+  .login-title {
+    font-size: 1rem; /* ALTERADO: De 16px para rem para melhor escalabilidade */
+  }
+}
+
+@media (max-width: 480px) {
+  .system-title {
+    font-size: 1rem; /* ALTERADO: De 16px para rem para melhor escalabilidade */
+  }
+  
+  .login-form-wrapper {
+    padding: 1.25rem 0.75rem 0 0.75rem; /* ALTERADO: De 20px 12px 0 12px para rem para melhor escalabilidade */
+    max-width: 16.25rem; /* ALTERADO: De 260px para rem para melhor escalabilidade */
+  }
+  
+  .form-input {
+    padding: 0.5rem 0.625rem; /* ALTERADO: De 8px 10px para rem para melhor escalabilidade */
+    font-size: 0.8125rem; /* ALTERADO: De 13px para rem para melhor escalabilidade */
+  }
+  
+  .login-button {
+    padding: 0.625rem 1rem; /* ALTERADO: De 10px 16px para rem para melhor escalabilidade */
+    font-size: 0.8125rem; /* ALTERADO: De 13px para rem para melhor escalabilidade */
+  }
+}
+
+

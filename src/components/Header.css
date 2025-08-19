@@ -1,0 +1,187 @@
+/* Header.css */
+.header {
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  color: white;
+  padding: 0.9375rem 0; /* ALTERADO: De 15px para rem para melhor escalabilidade */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  max-width: 75rem; /* ALTERADO: De 1200px para rem para melhor escalabilidade */
+  margin: 0 auto;
+  padding: 0 1.25rem; /* ALTERADO: De 20px para rem para melhor escalabilidade */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.9375rem; /* ALTERADO: De 15px para rem para melhor escalabilidade */
+}
+
+.header-logo {
+  width: 3.125rem; /* ALTERADO: De 50px para rem para melhor escalabilidade */
+  height: 3.125rem; /* ALTERADO: De 50px para rem para melhor escalabilidade */
+  border-radius: 50%;
+  object-fit: contain;
+  background: white;
+  padding: 0.3125rem; /* ALTERADO: De 5px para rem para melhor escalabilidade */
+}
+
+.header-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-title {
+  font-size: 1.5rem; /* ALTERADO: De 24px para rem para melhor escalabilidade */
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  font-size: 0.875rem; /* ALTERADO: De 14px para rem para melhor escalabilidade */
+  margin: 0;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem; /* ALTERADO: De 8px para rem para melhor escalabilidade */
+}
+
+.user-email {
+  font-size: 0.875rem; /* ALTERADO: De 14px para rem para melhor escalabilidade */
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.625rem; /* ALTERADO: De 10px para rem para melhor escalabilidade */
+}
+
+.admin-button,
+.logout-button {
+  padding: 0.5rem 1rem; /* ALTERADO: De 8px 16px para rem para melhor escalabilidade */
+  border: none;
+  border-radius: 0.375rem; /* ALTERADO: De 6px para rem para melhor escalabilidade */
+  font-size: 0.875rem; /* ALTERADO: De 14px para rem para melhor escalabilidade */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem; /* ALTERADO: De 5px para rem para melhor escalabilidade */
+}
+
+.admin-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.admin-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.admin-button.active {
+  background: rgba(255, 255, 255, 0.9);
+  color: #d32f2f;
+}
+
+.logout-button {
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.logout-button:hover {
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header-content {
+    padding: 0 0.9375rem; /* ALTERADO: De 15px para rem para melhor escalabilidade */
+    flex-direction: column;
+    gap: 0.9375rem; /* ALTERADO: De 15px para rem para melhor escalabilidade */
+  }
+
+  .header-left,
+  .header-right {
+    width: 100%;
+  }
+
+  .header-left {
+    justify-content: center;
+  }
+
+  .header-right {
+    justify-content: center;
+  }
+
+  .main-title {
+    font-size: 1.25rem; /* ALTERADO: De 20px para rem para melhor escalabilidade */
+  }
+
+  .subtitle {
+    font-size: 0.75rem; /* ALTERADO: De 12px para rem para melhor escalabilidade */
+  }
+
+  .user-info {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-section {
+    flex-direction: column;
+    gap: 0.625rem; /* ALTERADO: De 10px para rem para melhor escalabilidade */
+    text-align: center;
+  }
+
+  .header-logo {
+    width: 2.5rem; /* ALTERADO: De 40px para rem para melhor escalabilidade */
+    height: 2.5rem; /* ALTERADO: De 40px para rem para melhor escalabilidade */
+  }
+
+  .main-title {
+    font-size: 1.125rem; /* ALTERADO: De 18px para rem para melhor escalabilidade */
+  }
+
+  .header-actions {
+    flex-direction: column;
+    gap: 0.5rem; /* ALTERADO: De 8px para rem para melhor escalabilidade */
+    width: 100%;
+  }
+
+  .admin-button,
+  .logout-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
