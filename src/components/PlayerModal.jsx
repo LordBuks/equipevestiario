@@ -15,7 +15,7 @@ const PlayerModal = ({ player, isOpen, onClose }) => { // Define o componente fu
         </button>
 
         <div className="p-0"> {/* Div para agrupar o conteúdo principal do modal, sem padding inicial. */}
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 p-6 pb-0">Detalhes do Jogador</h2> {/* Título da seção de detalhes do jogador com estilos de texto e padding. */}
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 p-6 pb-0">Detalhes do Especial</h2> {/* Título da seção de detalhes do jogador com estilos de texto e padding. */}
           
           {/* Seção de destaque com foto e nome estilizado - Responsiva */} {/* Comentário para indicar a seção de destaque. */}
           <div className="relative h-auto md:h-96 overflow-hidden chelsea-hero-section"> {/* Div para a seção de destaque, com altura responsiva e overflow oculto. */}

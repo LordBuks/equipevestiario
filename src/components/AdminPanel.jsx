@@ -114,7 +114,7 @@ const AdminPanel = ({ onBackToPublic }) => {
                   className="flex items-center space-x-2 px-4 py-2 bg-[#E5050F] text-white rounded-lg hover:bg-[#C20C18] transition-colors"
                 >
                   <Plus size={20} />
-                  <span>Adicionar Jogador</span>
+                  <span>Adicionar Especiais</span>
                 </button>
                 <button
                   onClick={onBackToPublic}

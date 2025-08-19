@@ -52,7 +52,7 @@ const PlayerModalWithTabs = ({ player, isOpen, onClose }) => {
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
-              Detalhes do Jogador
+              Detalhes do Especial
             </button>
             <button
               onClick={() => setActiveTab('story')}
@@ -62,7 +62,7 @@ const PlayerModalWithTabs = ({ player, isOpen, onClose }) => {
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
-              Minha História
+              Observações
             </button>
           </nav>
         </div>
@@ -70,7 +70,7 @@ const PlayerModalWithTabs = ({ player, isOpen, onClose }) => {
         {/* Conteúdo das Abas */}
         {activeTab === 'details' && (
           <div className="p-0">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 p-6 pb-0">Detalhes do Jogador</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 p-6 pb-0">Detalhes do Especial</h2>
             
             {/* Seção de destaque com foto e nome estilizado - Responsiva */}
             <div className="relative h-auto md:h-96 overflow-hidden chelsea-hero-section">
@@ -311,13 +311,13 @@ const PlayerModalWithTabs = ({ player, isOpen, onClose }) => {
               <div className="p-6 text-center">
                 <div className="bg-gray-50 p-8 rounded-lg">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    História não encontrada
+                    Observações não encontradas
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    Este atleta ainda não tem uma história cadastrada.
+                    Este Especial não tem observações cadastradas.
                   </p>
                   <p className="text-sm text-gray-500">
-                    Entre em contato com a administração para adicionar a história deste atleta.
+                    Entre em contato com a administração para adicionar observações deste Especial.
                   </p>
                 </div>
               </div>

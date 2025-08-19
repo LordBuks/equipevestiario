@@ -21,8 +21,8 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
   const [editingStory, setEditingStory] = useState(null);
   const [error, setError] = useState('');
 
-  const categories = ['Sub20', 'Sub17', 'Sub16', 'Sub15', 'Sub14'];
-  const functions = ['Monitor', 'Assistente Social', 'Pedagoga'];
+  const categories = ['Especiais', 'Agentes'];
+  const functions = ['Especiais', 'Agentes'];
 
   useEffect(() => {
     loadData();
@@ -230,7 +230,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
                     className="flex items-center space-x-2 px-4 py-2 bg-[#E5050F] text-white rounded-lg hover:bg-[#C20C18] transition-colors"
                   >
                     <Plus size={20} />
-                    <span>Adicionar Jogador</span>
+                    <span>Adicionar Especial</span>
                   </button>
                 )}
                 {activeTab === 'employees' && (
@@ -239,7 +239,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
                     className="flex items-center space-x-2 px-4 py-2 bg-[#E5050F] text-white rounded-lg hover:bg-[#C20C18] transition-colors"
                   >
                     <Plus size={20} />
-                    <span>Adicionar Funcionário</span>
+                    <span>Adicionar Agente</span>
                   </button>
                 )}
                 {activeTab === 'stories' && (
@@ -273,7 +273,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
                 }`}
               >
                 <User size={16} />
-                Gerenciar Jogadores
+                Gerenciar Especiais
               </button>
               <button
                 onClick={() => setActiveTab('employees')}
@@ -284,7 +284,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
                 }`}
               >
                 <Briefcase size={16} />
-                Gerenciar Funcionários
+                Gerenciar Agentes
               </button>
               <button
                 onClick={() => setActiveTab('stories')}
@@ -323,14 +323,14 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
                 >
                   {activeTab === 'employees' ? (
                     <>
-                      <option value="">Todas as funções</option>
+                      <option value="">Buscar Agentes</option>
                       {functions.map(func => (
                         <option key={func} value={func}>{func}</option>
                       ))}
                     </>
                   ) : (
                     <>
-                      <option value="">Todas as categorias</option>
+                      <option value="">Buscar Agentes</option>
                       {categories.map(category => (
                         <option key={category} value={category}>{category}</option>
                       ))}
@@ -353,7 +353,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
               <div>
                 <div className="mb-4 flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-gray-900">
-                    Jogadores ({filteredPlayers.length})
+                    Especiais ({filteredPlayers.length})
                   </h3>
                 </div>
 
@@ -415,7 +415,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
               <div>
                 <div className="mb-4 flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-gray-900">
-                    Funcionários ({filteredEmployees.length})
+                    Agentes ({filteredEmployees.length})
                   </h3>
                 </div>
 

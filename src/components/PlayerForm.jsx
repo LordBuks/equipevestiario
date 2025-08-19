@@ -142,7 +142,7 @@ const PlayerForm = ({ player, onSubmit, onCancel }) => {
       <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-2xl font-bold text-gray-900">
-            {player ? 'Editar Jogador' : 'Adicionar Jogador'}
+            {player ? 'Editar Especial' : 'Adicionar Especial'}
           </h2>
           <button 
             onClick={onCancel}
@@ -166,7 +166,7 @@ const PlayerForm = ({ player, onSubmit, onCancel }) => {
           {/* Upload de foto */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Foto do Jogador
+              Foto do Especial
             </label>
             <div className="flex items-center space-x-4">
               <div className="w-24 h-32 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">

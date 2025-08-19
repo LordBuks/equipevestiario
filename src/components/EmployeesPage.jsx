@@ -50,10 +50,10 @@ const EmployeesPage = ({ onAdminClick, onBackToWelcome }) => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Magic Team do Alojamento
+              Setores
             </h1>
             <p className="text-lg text-gray-600">
-              Conheça a equipe do alojamento.
+              Gerencie os postos de serviço.
             </p>
           </div>
         </div>
@@ -62,8 +62,8 @@ const EmployeesPage = ({ onAdminClick, onBackToWelcome }) => {
       <CategoryMenu 
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
-        categories={["Monitores", "Assistentes Sociais", "Pedagogia"]}
-        title="Funcionários por Função"
+        categories={["Visitantes", "Imprensa", "Presidência", "Rampa"]}
+        title="Distribuição de Agentes"
       />
       
       {employeesError && (
@@ -79,10 +79,10 @@ const EmployeesPage = ({ onAdminClick, onBackToWelcome }) => {
           <div className="text-center py-12">
             <div className="bg-white rounded-lg shadow-sm p-8">
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Nenhum funcionário encontrado
+                Nenhum agente encontrado
               </h3>
               <p className="text-gray-600">
-                Não há funcionários cadastrados na categoria "{selectedCategory}" no momento.
+                Não há agentes cadastrados na categoria "{selectedCategory}" no momento.
               </p>
             </div>
           </div>

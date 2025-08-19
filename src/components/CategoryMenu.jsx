@@ -2,13 +2,13 @@ import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 
 const CategoryMenu = ({ selectedCategory, onCategoryChange, categories, title }) => {
   // Categorias padrão para atletas se não forem fornecidas
-  const defaultCategories = ['Sub20', 'Sub17', 'Sub16', 'Sub15', 'Sub14'];
+  const defaultCategories = ['Especiais', 'Agentes'];
   const menuCategories = categories || defaultCategories;
-  const menuTitle = title || 'Atletas Alojados';
+  const menuTitle = title || 'Categorias de Agentes';
 
   const ButtonComponent = ({ category, isSelected }) => {
     // Determinar tamanho baseado no tipo de categoria
-    const isEmployeeCategory = ['Monitores', 'Assistentes Sociais', 'Pedagogia'].includes(category);
+    const isEmployeeCategory = ['Especiais', 'Agentes'].includes(category);
     const buttonWidth = isEmployeeCategory ? 'w-36' : 'w-20';
     const buttonHeight = 'h-10';
     

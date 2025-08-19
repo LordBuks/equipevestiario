@@ -25,7 +25,7 @@ const EmployeeForm = ({ employee, onSubmit, onCancel }) => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  const functions = ['Monitores', 'Assistentes Sociais', 'Pedagogia'];
+  const functions = ['Especial', 'Agentes'];
   const educationLevels = [
     'Ensino Fundamental',
     'Ensino Médio',
@@ -169,7 +169,7 @@ const EmployeeForm = ({ employee, onSubmit, onCancel }) => {
       <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
           <h2 className="text-xl font-semibold text-gray-900">
-            {employee ? 'Editar Funcionário' : 'Adicionar Funcionário'}
+            {employee ? 'Editar Especial' : 'Adicionar Agente'}
           </h2>
           <button
             onClick={onCancel}
@@ -193,7 +193,7 @@ const EmployeeForm = ({ employee, onSubmit, onCancel }) => {
 
           {/* Seção Foto */}
           <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Foto do Funcionário</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Foto do Agente</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>

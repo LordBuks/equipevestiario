@@ -27,7 +27,7 @@ const Header = ({ onAdminClick, onBackToWelcome }) => {
                 alt="Sport Club Internacional" 
                 className="h-10 w-10 flex-shrink-0"
               />
-              <h1 className="text-xl font-bold text-[#E5050F] tracking-wide whitespace-nowrap">CELEIRO</h1>
+              <h1 className="text-xl font-bold text-[#E5050F] tracking-wide whitespace-nowrap">VESTIÁRIO</h1>
             </div>
             
             <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0 ml-2">

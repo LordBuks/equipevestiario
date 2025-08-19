@@ -19,11 +19,11 @@ const LoggedInWelcome = ({ user, onContinue, onAdminClick, onLogout, onShowEmplo
           
           <div className="bg-white rounded-lg shadow-lg p-5 mb-3">
             <h2 className="text-lg font-semibold text-[#E5050F] mb-3">
-              Bem vindo"
+              Bem vindo!
             </h2>
             
             <p className="text-sm text-gray-700 mb-5">
-              Você agora tem acesso ao Sistema de Gestão do Agentes de Segurança. <p></p>
+              Agora você tem acesso ao Sistema de Gestão dos Agentes de Segurança. <p></p>
               Aqui você pode visualizar os dados.
             </p>
 
@@ -60,7 +60,7 @@ const LoggedInWelcome = ({ user, onContinue, onAdminClick, onLogout, onShowEmplo
                 className="inline-flex items-center justify-center space-x-2 px-6 py-3 bg-[#E5050F] border-2 border-white text-white rounded-md welcome-button hover:bg-white hover:text-[#E5050F] hover:border-[#E5050F] transition-colors text-sm font-semibold min-w-[140px]"
               >
                 <Users size={18} />
-                <span>Coordenadores</span>
+                <span>Efetivo</span>
               </button>
 
               <button
@@ -68,7 +68,7 @@ const LoggedInWelcome = ({ user, onContinue, onAdminClick, onLogout, onShowEmplo
                 className="inline-flex items-center justify-center space-x-2 px-6 py-3 bg-[#E5050F] border-2 border-white text-white rounded-md welcome-button hover:bg-white hover:text-[#E5050F] hover:border-[#E5050F] transition-colors text-sm font-semibold min-w-[140px]"
               >
                 <Users size={18} />
-                <span>Agentes</span>
+                <span>Setores</span>
               </button>
 
               {isAdminUser && (
