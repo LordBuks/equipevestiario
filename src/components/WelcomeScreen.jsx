@@ -1,5 +1,5 @@
 import React from 'react';
-import interLogo from '../assets/inter-logo.png';
+import interLogo from "../assets/inter-logo.png";
 
 const WelcomeScreen = () => {
   return (

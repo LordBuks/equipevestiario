@@ -7,15 +7,15 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-logo-container">
           <img 
-            src="https://i.imgur.com/HIsH9X5.png" 
-            alt="Logo Serviço Social" 
-            className="footer-logo"
+            src="/src/assets/stk_logo.jpg" 
+            alt="Logo STK" 
+            className="footer-logo round"
           />
         </div>
         <div className="footer-text">
           <p className="footer-title">
-            <p>Sistema de Gestão de Atletas Alojados</p>
-            <p>Departamento de Serviço Social</p>
+            <p>Gestão de Agentes de Segurança</p>
+            <p>Equipe do Vestiário</p>
             <p></p>
             <p class="text-xs text-gray-500 mt-4">© 2025 TechVamp</p>
           </p>

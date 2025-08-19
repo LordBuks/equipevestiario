@@ -36,7 +36,7 @@ const Login = () => {
               alt="SC Internacional" 
               className="h-16 w-16 mx-auto mb-4 rounded-full object-contain"
             />
-            <h1 className="text-2xl font-bold text-[#E5050F] mb-2">Alojamento</h1>
+            <h1 className="text-2xl font-bold text-[#E5050F] mb-2">Vestiário</h1>
           </div>
 
           <div className="bg-white rounded-lg shadow-lg p-6">

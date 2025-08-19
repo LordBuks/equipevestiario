@@ -1,19 +1,19 @@
 import React from 'react';
-import logoServicoSocial from '../assets/servico_social_logo.png';
+import logoSTK from '../assets/stk_logo.jpg';
 
-export const ServicoSocialLogo = ({ 
-  className = "", 
-  width = 64, 
-  height = 64 
+export const ServicoSocialLogo = ({
+  className = "",
+  width = 64,
+  height = 64
 }) => {
   return (
     <img
-      src={logoServicoSocial}
-      alt="Logo Serviço Social"
+      src={logoSTK}
+      alt="Logo STK"
       width={width}
       height={height}
       className={className}
-      style={{ 
+      style={{
         objectFit: 'contain',
         maxWidth: '100%',
         maxHeight: '100%'
@@ -21,4 +21,5 @@ export const ServicoSocialLogo = ({
     />
   );
 };
+
 

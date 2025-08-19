@@ -1,5 +1,5 @@
 import React from 'react';
-import logoInternacional from '../assets/internacional_logo.png';
+import logoInternacional from "../assets/internacional_logo.png";
 
 export const InterLogo = ({ 
   className = "", 
