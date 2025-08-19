@@ -230,7 +230,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
                     className="flex items-center space-x-2 px-4 py-2 bg-[#E5050F] text-white rounded-lg hover:bg-[#C20C18] transition-colors"
                   >
                     <Plus size={20} />
-                    <span>Adicionar Especial</span>
+                    <span>Adicionar Efetivo</span>
                   </button>
                 )}
                 {activeTab === 'employees' && (
@@ -239,7 +239,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
                     className="flex items-center space-x-2 px-4 py-2 bg-[#E5050F] text-white rounded-lg hover:bg-[#C20C18] transition-colors"
                   >
                     <Plus size={20} />
-                    <span>Adicionar Agente</span>
+                    <span>Adicionar efetivo no Posto</span>
                   </button>
                 )}
                 {activeTab === 'stories' && (
@@ -273,7 +273,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
                 }`}
               >
                 <User size={16} />
-                Gerenciar Especiais
+                Gerenciar Efetivo
               </button>
               <button
                 onClick={() => setActiveTab('employees')}
@@ -284,7 +284,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
                 }`}
               >
                 <Briefcase size={16} />
-                Gerenciar Agentes
+                Gerenciar Postos
               </button>
               <button
                 onClick={() => setActiveTab('stories')}
@@ -353,7 +353,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
               <div>
                 <div className="mb-4 flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-gray-900">
-                    Especiais ({filteredPlayers.length})
+                    Agentes ({filteredPlayers.length})
                   </h3>
                 </div>
 

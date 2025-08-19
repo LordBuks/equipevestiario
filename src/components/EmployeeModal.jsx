@@ -53,7 +53,7 @@ const EmployeeModal = ({ employee, isOpen, onClose }) => {
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
-              Detalhes do Funcionário
+              Detalhes do Agente
             </button>
             <button
               onClick={() => setActiveTab('story')}
@@ -63,7 +63,7 @@ const EmployeeModal = ({ employee, isOpen, onClose }) => {
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
-              Minha História
+              Minhas Observações
             </button>
           </nav>
         </div>
@@ -71,7 +71,7 @@ const EmployeeModal = ({ employee, isOpen, onClose }) => {
         {/* Conteúdo das Abas */}
         {activeTab === 'details' && (
           <div className="p-0">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 p-6 pb-0">Detalhes do Funcionário</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 p-6 pb-0">Meus Dados</h2>
             
             {/* Seção de destaque com foto e nome estilizado - Responsiva */}
             <div className="relative h-auto md:h-96 overflow-hidden chelsea-hero-section">
@@ -238,7 +238,7 @@ const EmployeeModal = ({ employee, isOpen, onClose }) => {
         {/* Aba Minha História */}
         {activeTab === 'story' && (
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Minha História</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Observações</h2>
             
             {loadingStory ? (
               <div className="flex items-center justify-center py-8">

@@ -25,7 +25,7 @@ const EmployeeForm = ({ employee, onSubmit, onCancel }) => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  const functions = ['Especial', 'Agentes'];
+  const functions = ['Visitantes', 'Imprensa', 'Presidência','Rampa'];
   const educationLevels = [
     'Ensino Fundamental',
     'Ensino Médio',
@@ -169,7 +169,7 @@ const EmployeeForm = ({ employee, onSubmit, onCancel }) => {
       <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
           <h2 className="text-xl font-semibold text-gray-900">
-            {employee ? 'Editar Especial' : 'Adicionar Agente'}
+            {employee ? 'Editar Especial' : 'Adicionar Agente no Posto'}
           </h2>
           <button
             onClick={onCancel}
@@ -300,7 +300,7 @@ const EmployeeForm = ({ employee, onSubmit, onCancel }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Função *
+                  Posto *
                 </label>
                 <select
                   name="function"
@@ -309,7 +309,7 @@ const EmployeeForm = ({ employee, onSubmit, onCancel }) => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent"
                   required
                 >
-                  <option value="">Selecione a função</option>
+                  <option value="">Selecione o posto</option>
                   {functions.map(func => (
                     <option key={func} value={func}>{func}</option>
                   ))}

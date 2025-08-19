@@ -12,7 +12,7 @@ const AdminPanel = ({ onBackToPublic }) => {
   const [editingPlayer, setEditingPlayer] = useState(null);
   const [error, setError] = useState('');
 
-  const categories = ['Sub20', 'Sub17', 'Sub16', 'Sub15', 'Sub14'];
+  const categories = ['Especiais', 'Agentes'];
 
   useEffect(() => {
     loadPlayers();
