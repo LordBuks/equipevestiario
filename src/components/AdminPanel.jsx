@@ -336,8 +336,8 @@ const AdminPanel = ({ onBackToPublic }) => {
                               {player.category}
                             </span>
                           </div>
-                          {(player.address || player.position) && (
-                            <p className="text-xs sm:text-sm text-gray-600 truncate">{player.address || player.position}</p>
+                          {player.position && (
+                            <p className="text-xs sm:text-sm text-gray-600 truncate">{player.position}</p>
                           )}
                           {player.birthplace && (
                             <p className="text-xs text-gray-500 truncate">{player.birthplace}</p>

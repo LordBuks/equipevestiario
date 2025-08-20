@@ -117,7 +117,7 @@ const PlayerStoryView = ({ player, story }) => {
                 <span className="font-medium">Categoria:</span> {player.category}
               </div>
               <div>
-                <span className="font-medium">Endereço:</span> {player.address || player.position || 'Não informado'}
+                <span className="font-medium">Posição:</span> {player.position || 'Não informada'}
               </div>
               <div>
                 <span className="font-medium">Naturalidade:</span> {player.birthplace || 'Não informada'}
