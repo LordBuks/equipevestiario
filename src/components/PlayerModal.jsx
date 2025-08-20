@@ -124,11 +124,11 @@ const PlayerModal = ({ player, isOpen, onClose }) => { // Define o componente fu
               
               <div className="space-y-3"> {/* Div para agrupar os campos. */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Grid para os campos. */}
-                  <div> {/* Div para o campo de posição. */}
+                  <div> {/* Div para o campo de endereço (anteriormente posição). */}
                     <label className="block text-sm font-medium text-gray-700 mb-1"> {/* Rótulo. */}
-                      Posição {/* Texto do rótulo. */}
+                      Endereço {/* Texto do rótulo. */}
                     </label>
-                    <p className="text-gray-900">{player.position || 'Não informada'}</p> {/* Valor. */}
+                    <p className="text-gray-900">{player.address || player.position || 'Não informado'}</p> {/* Valor com compatibilidade. */}
                   </div>
                   
                   <div> {/* Div para o campo de categoria. */}
@@ -136,6 +136,15 @@ const PlayerModal = ({ player, isOpen, onClose }) => { // Define o componente fu
                       Categoria {/* Texto do rótulo. */}
                     </label>
                     <p className="text-gray-900">{player.category || 'Não informada'}</p> {/* Valor. */}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Grid para CEP. */}
+                  <div> {/* Div para o campo de CEP. */}
+                    <label className="block text-sm font-medium text-gray-700 mb-1"> {/* Rótulo. */}
+                      CEP {/* Texto do rótulo. */}
+                    </label>
+                    <p className="text-gray-900">{player.cep || 'Não informado'}</p> {/* Valor. */}
                   </div>
                 </div>
               </div>
@@ -147,43 +156,41 @@ const PlayerModal = ({ player, isOpen, onClose }) => { // Define o componente fu
               
               <div className="space-y-3"> {/* Div para agrupar os campos. */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Grid para os campos. */}
-                  <div> {/* Div para o campo de escola. */}
+                  <div> {/* Div para o campo de matrícula (anteriormente escola). */}
                     <label className="block text-sm font-medium text-gray-700 mb-1"> {/* Rótulo. */}
-                      Escola {/* Texto do rótulo. */}
+                      Matrícula {/* Texto do rótulo. */}
                     </label>
-                    <p className="text-gray-900">{player.school || 'Não informada'}</p> {/* Valor. */}
+                    <p className="text-gray-900">{player.registration || player.school || 'Não informada'}</p> {/* Valor com compatibilidade. */}
                   </div>
                   
-                  <div> {/* Div para o campo de ano que estuda. */}
+                  <div> {/* Div para o campo de observações (anteriormente ano que estuda). */}
                     <label className="block text-sm font-medium text-gray-700 mb-1"> {/* Rótulo. */}
-                      Ano que Estuda {/* Texto do rótulo. */}
+                      Observações {/* Texto do rótulo. */}
                     </label>
-                    <p className="text-gray-900">{player.year || 'Não informado'}</p> {/* Valor. */}
+                    <p className="text-gray-900">{player.observations || player.year || 'Não informado'}</p> {/* Valor com compatibilidade. */}
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Dados do Alojamento */} {/* Comentário para indicar a seção de dados do alojamento. */}
-            <div className="bg-gray-50 p-4 rounded-lg"> {/* Div para a seção de dados do alojamento. */}
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Dados do Alojamento</h3> {/* Título da seção. */}
+            {/* Documentação (anteriormente Dados do Alojamento) */} {/* Comentário para indicar a seção de documentação. */}
+            <div className="bg-gray-50 p-4 rounded-lg"> {/* Div para a seção de documentação. */}
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Documentação</h3> {/* Título da seção. */}
               
               <div className="space-y-3"> {/* Div para agrupar os campos. */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Grid para os campos. */}
-                  <div> {/* Div para o campo de admissão no alojamento. */}
+                  <div> {/* Div para o campo de CPF (anteriormente admissão no alojamento). */}
                     <label className="block text-sm font-medium text-gray-700 mb-1"> {/* Rótulo. */}
-                      Admissão no Alojamento {/* Texto do rótulo. */}
+                      CPF {/* Texto do rótulo. */}
                     </label>
-                    <p className="text-gray-900"> {/* Valor. */}
-                      {player.admissionDate ? new Date(player.admissionDate).toLocaleDateString('pt-BR') : 'Não informada'} {/* Exibe a data de admissão formatada ou 'Não informada'. */}
-                    </p>
+                    <p className="text-gray-900">{player.cpf || player.admissionDate || 'Não informado'}</p> {/* Valor com compatibilidade. */}
                   </div>
                   
-                  <div> {/* Div para o campo de quarto. */}
+                  <div> {/* Div para o campo de RG (anteriormente quarto). */}
                     <label className="block text-sm font-medium text-gray-700 mb-1"> {/* Rótulo. */}
-                      Quarto {/* Texto do rótulo. */}
+                      RG {/* Texto do rótulo. */}
                     </label>
-                    <p className="text-gray-900">{player.room || 'Não informado'}</p> {/* Valor. */}
+                    <p className="text-gray-900">{player.rg || player.room || 'Não informado'}</p> {/* Valor com compatibilidade. */}
                   </div>
                 </div>
               </div>
@@ -195,13 +202,25 @@ const PlayerModal = ({ player, isOpen, onClose }) => { // Define o componente fu
             {/* Observações Médicas */} {/* Comentário para indicar a seção de observações médicas. */}
             <div className="bg-red-50 p-4 rounded-lg border border-red-200"> {/* Div para a seção de observações médicas, com fundo vermelho claro e borda. */}
               <h4 className="text-lg font-semibold text-red-800 mb-3">Observações Médicas</h4> {/* Título da seção. */}
-              <div> {/* Div para o campo de alergias e observações. */}
-                <label className="block text-sm font-medium text-red-700 mb-1"> {/* Rótulo. */}
-                  Alergias e Observações {/* Texto do rótulo. */}
-                </label>
-                <p className="text-red-900"> {/* Valor. */}
-                  {player.medicalObservations || 'Nenhuma informada pela mãe.'} {/* Exibe as observações médicas ou uma mensagem padrão. */}
-                </p>
+              
+              <div className="space-y-3"> {/* Div para agrupar os campos com espaçamento. */}
+                <div> {/* Div para o campo de tipo sanguíneo. */}
+                  <label className="block text-sm font-medium text-red-700 mb-1"> {/* Rótulo. */}
+                    Tipo Sanguíneo e Fator RH {/* Texto do rótulo. */}
+                  </label>
+                  <p className="text-red-900"> {/* Valor. */}
+                    {player.bloodType || 'Não informado'} {/* Exibe o tipo sanguíneo ou 'Não informado'. */}
+                  </p>
+                </div>
+                
+                <div> {/* Div para o campo de alergias e observações. */}
+                  <label className="block text-sm font-medium text-red-700 mb-1"> {/* Rótulo. */}
+                    Alergias e Observações {/* Texto do rótulo. */}
+                  </label>
+                  <p className="text-red-900"> {/* Valor. */}
+                    {player.medicalObservations || 'Nenhuma informada pela mãe.'} {/* Exibe as observações médicas ou uma mensagem padrão. */}
+                  </p>
+                </div>
               </div>
             </div>
 

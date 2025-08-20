@@ -381,7 +381,7 @@ const AdminPanelWithStories = ({ onBackToPublic }) => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-gray-900 truncate">{player.name}</h3>
-                            <p className="text-sm text-gray-600">{player.position || 'Posição não informada'}</p>
+                            <p className="text-sm text-gray-600">{player.address || player.position || 'Endereço não informado'}</p>
                             <p className="text-sm text-gray-600">{player.category}</p>
                             <p className="text-xs text-gray-500">
                               {player.birthplace || 'Local não informado'}
