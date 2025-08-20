@@ -23,7 +23,7 @@ const LoggedInWelcome = ({ user, onContinue, onAdminClick, onLogout, onShowSecto
             </h2>
             
             <p className="text-sm text-gray-700 mb-5">
-              Agora você tem acesso ao Sistema de Gestão dos Agentes de Segurança.
+              Agora você tem acesso ao Sistema de Gestão dos Agentes de Segurança.<p></p>
               Aqui você pode visualizar os dados.
             </p>
 

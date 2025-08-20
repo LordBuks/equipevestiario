@@ -4,20 +4,22 @@ import { utils, storageService } from '../services/firebaseService';
 
 const PlayerForm = ({ player, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    fullName: '',
-    birthDate: '',
-    position: '',
-    admissionDate: '',
-    school: '',
-    year: '',
-    birthplace: '',
-    room: '',
-    medicalObservations: '',
-    category: '', // Mantendo category para o tipo (Especial/Agente)
-    emergencyContactName: '',
-    emergencyContactPhone: '',
-    assignments: [] // Adicionando campo de atribuições
+    name: "",
+    fullName: "",
+    birthDate: "",
+    address: "", 
+    cpf: "", 
+    rg: "", 
+    birthplace: "",
+    cep: "", 
+    registration: "", 
+    observations: "", 
+    medicalObservations: "",
+    bloodType: "", // Adicionado campo bloodType
+    category: "", 
+    emergencyContactName: "",
+    emergencyContactPhone: "",
+    assignments: [] 
   });
   const [photoFile, setPhotoFile] = useState(null);
   const [photoPreview, setPhotoPreview] = useState('');
@@ -49,31 +51,51 @@ const PlayerForm = ({ player, onSubmit, onCancel }) => {
   useEffect(() => {
     if (player) {
       setFormData({
-        name: player.name || '',
-        fullName: player.fullName || '',
-        birthDate: player.birthDate || '',
-        position: player.position || '',
-        admissionDate: player.admissionDate || '',
-        school: player.school || '',
-        year: player.year || '',
-        birthplace: player.birthplace || '',
-        room: player.room || '',
-        medicalObservations: player.medicalObservations || '',
-        category: player.category || '', // Usar category para o tipo
-        emergencyContactName: player.emergencyContactName || '',
-        emergencyContactPhone: player.emergencyContactPhone || '',
-        assignments: player.assignments || [] // Carregar atribuições existentes
+        name: player.name || "",
+        fullName: player.fullName || "",
+        birthDate: player.birthDate || "",
+        address: player.address || player.position || "",
+        cpf: player.cpf || player.admissionDate || "",
+        rg: player.rg || player.room || "",
+        birthplace: player.birthplace || "",
+        cep: player.cep || "",
+        registration: player.registration || player.school || "",
+        observations: player.observations || player.year || "",
+        medicalObservations: player.medicalObservations || "",
+        bloodType: player.bloodType || "",
+        category: player.category || "",
+        emergencyContactName: player.emergencyContactName || "",
+        emergencyContactPhone: player.emergencyContactPhone || "",
+        assignments: player.assignments || []
       });
-      setPhotoPreview(player.photoUrl || '');
+      setPhotoPreview(player.photoUrl || "");
     }
   }, [player]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    // Formatação específica para CEP
+    if (name === 'cep') {
+      // Remove tudo que não é número
+      const numericValue = value.replace(/\D/g, '');
+      
+      // Aplica a máscara 12345-678
+      let formattedValue = numericValue;
+      if (numericValue.length > 5) {
+        formattedValue = numericValue.slice(0, 5) + '-' + numericValue.slice(5, 8);
+      }
+      
+      setFormData(prev => ({
+        ...prev,
+        [name]: formattedValue
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   const handleAssignmentChange = (assignment) => {
@@ -318,26 +340,23 @@ const PlayerForm = ({ player, onSubmit, onCancel }) => {
                 />
               </div>
 
-              {/* Posição (Agora sempre visível) */}
+              {/* Endereço (Anteriormente Posição) */}
               <div className="space-y-2 sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700">
-                  Posição
+                  Endereço
                 </label>
-                <select
-                  name="position"
-                  value={formData.position}
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
                   onChange={handleInputChange}
+                  placeholder="Digite o endereço completo"
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
-                >
-                  <option value="">Selecione uma posição</option>
-                  {positions.map(position => (
-                    <option key={position} value={position}>{position}</option>
-                  ))}
-                </select>
+                />
               </div>
 
-              {/* Naturalidade */}
-              <div className="space-y-2 sm:col-span-2">
+              {/* Naturalidade e CEP na mesma linha */}
+              <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
                   Naturalidade
                 </label>
@@ -347,6 +366,22 @@ const PlayerForm = ({ player, onSubmit, onCancel }) => {
                   value={formData.birthplace}
                   onChange={handleInputChange}
                   placeholder="Cidade de nascimento"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
+                />
+              </div>
+
+              {/* CEP */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  CEP
+                </label>
+                <input
+                  type="text"
+                  name="cep"
+                  value={formData.cep}
+                  onChange={handleInputChange}
+                  placeholder="12345-678"
+                  maxLength="9"
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
                 />
               </div>
@@ -374,68 +409,71 @@ const PlayerForm = ({ player, onSubmit, onCancel }) => {
             </div>
           </div>
 
-          {/* Informações do Alojamento - Responsivo */}
+          {/* Documentação - Responsivo */}
           <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6">
             <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-4 sm:mb-6 flex items-center">
               <div className="w-2 h-4 sm:h-6 bg-[#E5050F] rounded-full mr-2 sm:mr-3"></div>
-              Informações do Alojamento
+              Documentação
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-              {/* Admissão no Alojamento */}
+              {/* CPF */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
-                  Admissão no Alojamento
+                  CPF
                 </label>
                 <input
-                  type="date"
-                  name="admissionDate"
-                  value={formData.admissionDate}
+                  type="text"
+                  name="cpf"
+                  value={formData.cpf}
                   onChange={handleInputChange}
+                  placeholder="000.000.000-00"
+                  maxLength="14"
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
                 />
               </div>
 
-              {/* Quarto */}
+              {/* RG */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
-                  Quarto
+                  RG
                 </label>
                 <input
                   type="text"
-                  name="room"
-                  value={formData.room}
+                  name="rg"
+                  value={formData.rg}
                   onChange={handleInputChange}
-                  placeholder="Número do quarto"
+                  placeholder="00.000.000-0"
+                  maxLength="12"
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
                 />
               </div>
 
-              {/* Escola */}
+              {/* Matrícula */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
-                  Escola
+                  Matrícula
                 </label>
                 <input
                   type="text"
-                  name="school"
-                  value={formData.school}
+                  name="registration"
+                  value={formData.registration}
                   onChange={handleInputChange}
-                  placeholder="Nome da escola"
+                  placeholder="Número de matrícula"
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
                 />
               </div>
 
-              {/* Ano Escolar */}
+              {/* Observações */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
-                  Ano Escolar
+                  Observações
                 </label>
                 <input
                   type="text"
-                  name="year"
-                  value={formData.year}
+                  name="observations"
+                  value={formData.observations}
                   onChange={handleInputChange}
-                  placeholder="Ano escolar"
+                  placeholder="Observações gerais"
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
                 />
               </div>
@@ -489,18 +527,44 @@ const PlayerForm = ({ player, onSubmit, onCancel }) => {
               <div className="w-2 h-4 sm:h-6 bg-[#E5050F] rounded-full mr-2 sm:mr-3"></div>
               Observações Médicas
             </h3>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Observações
-              </label>
-              <textarea
-                name="medicalObservations"
-                value={formData.medicalObservations}
-                onChange={handleInputChange}
-                placeholder="Informações médicas relevantes"
-                rows="3"
-                className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
-              ></textarea>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              {/* Tipo Sanguíneo e Fator RH */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Tipo Sanguíneo e Fator RH
+                </label>
+                <select
+                  name="bloodType"
+                  value={formData.bloodType}
+                  onChange={handleInputChange}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
+                >
+                  <option value="">Selecione o tipo sanguíneo</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+              </div>
+
+              {/* Observações */}
+              <div className="space-y-2 sm:col-span-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Observações
+                </label>
+                <textarea
+                  name="medicalObservations"
+                  value={formData.medicalObservations}
+                  onChange={handleInputChange}
+                  placeholder="Informações médicas relevantes"
+                  rows="3"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
+                ></textarea>
+              </div>
             </div>
           </div>
 

@@ -134,7 +134,7 @@ function AppContent() {
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
           categories={["Especial", "Agente"]} // Categorias padronizadas
-          title="Categorias de Pessoas"
+          title="Categorias de Agentes"
         />
         
         {error && (

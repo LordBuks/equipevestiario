@@ -4,7 +4,7 @@ const PlayerGrid = ({ players, onPlayerClick }) => {
   if (players.length === 0) {
     return (
       <div className="text-center py-10">
-        <p className="text-gray-500 text-base">Nenhum jogador encontrado nesta categoria.</p>
+        <p className="text-gray-500 text-base">Nenhum Agente encontrado nesta categoria.</p>
       </div>
     );
   }

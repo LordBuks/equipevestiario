@@ -76,10 +76,10 @@ const SectorsPage = ({ onAdminClick, onBackToWelcome }) => { // Renomeado para S
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Setores
+              Postos de Trabalho
             </h1>
             <p className="text-lg text-gray-600">
-              Visualize a distribuição de pessoas por posto.
+              Visualize a distribuição dos Agentes por posto.
             </p>
           </div>
         </div>
@@ -108,7 +108,7 @@ const SectorsPage = ({ onAdminClick, onBackToWelcome }) => { // Renomeado para S
                 Nenhuma pessoa encontrada
               </h3>
               <p className="text-gray-600">
-                Não há pessoas cadastradas no setor "{selectedCategory || 'selecionado'}" no momento.
+                Não há Agentes cadastradas no setor "{selectedCategory || 'selecionado'}" no momento.
               </p>
             </div>
           </div>
