@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { personnelService } from '../services/personnelService';
+import { playersService } from '../services/firebaseService'; // Importar playersService
 
 export const usePersonnel = () => {
   const [personnel, setPersonnel] = useState([]);
@@ -11,7 +11,7 @@ export const usePersonnel = () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await personnelService.getAll();
+      const data = await playersService.getAll(); // Usar playersService.getAll()
       setPersonnel(data);
     } catch (err) {
       console.error('Erro ao carregar pessoal:', err);
@@ -26,9 +26,9 @@ export const usePersonnel = () => {
     loadPersonnel();
   }, []);
 
-  // Filtrar pessoal por tipo
+  // Filtrar pessoal por categoria (Agente/Especial)
   const getPersonnelByType = (type) => {
-    return personnel.filter(person => person.type === type);
+    return personnel.filter(person => person.category === type);
   };
 
   // Filtrar pessoal por atribuição
@@ -38,68 +38,9 @@ export const usePersonnel = () => {
     );
   };
 
-  // Filtrar pessoal disponível para atribuição
-  const getAvailableForAssignment = (assignment) => {
-    return personnel.filter(person => 
-      !person.assignments || !person.assignments.includes(assignment)
-    );
-  };
-
-  // Adicionar novo membro do pessoal
-  const addPersonnel = async (personnelData) => {
-    try {
-      const id = await personnelService.add(personnelData);
-      await loadPersonnel(); // Recarregar dados
-      return id;
-    } catch (err) {
-      console.error('Erro ao adicionar pessoal:', err);
-      throw err;
-    }
-  };
-
-  // Atualizar membro do pessoal
-  const updatePersonnel = async (id, personnelData) => {
-    try {
-      await personnelService.update(id, personnelData);
-      await loadPersonnel(); // Recarregar dados
-    } catch (err) {
-      console.error('Erro ao atualizar pessoal:', err);
-      throw err;
-    }
-  };
-
-  // Adicionar atribuição
-  const addAssignment = async (id, assignment) => {
-    try {
-      await personnelService.addAssignment(id, assignment);
-      await loadPersonnel(); // Recarregar dados
-    } catch (err) {
-      console.error('Erro ao adicionar atribuição:', err);
-      throw err;
-    }
-  };
-
-  // Remover atribuição
-  const removeAssignment = async (id, assignment) => {
-    try {
-      await personnelService.removeAssignment(id, assignment);
-      await loadPersonnel(); // Recarregar dados
-    } catch (err) {
-      console.error('Erro ao remover atribuição:', err);
-      throw err;
-    }
-  };
-
-  // Remover membro do pessoal
-  const deletePersonnel = async (id) => {
-    try {
-      await personnelService.delete(id);
-      await loadPersonnel(); // Recarregar dados
-    } catch (err) {
-      console.error('Erro ao remover pessoal:', err);
-      throw err;
-    }
-  };
+  // As funções de add, update e delete serão tratadas diretamente nos componentes que usam o PlayerForm
+  // ou AdminPanel, chamando playersService diretamente.
+  // Este hook foca mais na leitura e filtragem dos dados.
 
   return {
     personnel,
@@ -108,14 +49,9 @@ export const usePersonnel = () => {
     loadPersonnel,
     getPersonnelByType,
     getPersonnelByAssignment,
-    getAvailableForAssignment,
-    addPersonnel,
-    updatePersonnel,
-    addAssignment,
-    removeAssignment,
-    deletePersonnel
   };
 };
 
 export default usePersonnel;
+
 

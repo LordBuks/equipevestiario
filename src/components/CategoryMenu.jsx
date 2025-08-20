@@ -1,15 +1,11 @@
 import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 
 const CategoryMenu = ({ selectedCategory, onCategoryChange, categories, title }) => {
-  // Categorias padrão para atletas se não forem fornecidas
-  const defaultCategories = ['Especiais', 'Agentes'];
-  const menuCategories = categories || defaultCategories;
-  const menuTitle = title || 'Categorias de Agentes';
+  const menuCategories = categories; // Agora usa apenas as categorias passadas
+  const menuTitle = title || 'Categorias'; // Título padrão mais genérico
 
   const ButtonComponent = ({ category, isSelected }) => {
-    // Determinar tamanho baseado no tipo de categoria
-    const isEmployeeCategory = ['Especiais', 'Agentes'].includes(category);
-    const buttonWidth = isEmployeeCategory ? 'w-36' : 'w-20';
+    const buttonWidth = 'w-auto px-4'; // Ajustar largura para ser mais flexível
     const buttonHeight = 'h-10';
     
     return (
@@ -71,4 +67,5 @@ const CategoryMenu = ({ selectedCategory, onCategoryChange, categories, title })
 };
 
 export default CategoryMenu;
+
 

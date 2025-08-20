@@ -4,12 +4,12 @@ import Header from './components/Header';
 import CategoryMenu from './components/CategoryMenu';
 import PlayerGrid from './components/PlayerGrid';
 import PlayerModalWithTabs from './components/PlayerModalWithTabs';
-import EmployeesPageNew from './components/EmployeesPageNew'; // Novo componente
-import AdminPanelNew from './components/AdminPanelNew'; // Novo componente
+import SectorsPage from './pages/SectorsPage'; // Importando o componente renomeado
+import AdminPanel from './components/AdminPanel';
 import Login from './components/Login';
 import WelcomeScreen from './components/WelcomeScreen';
 import LoggedInWelcome from './components/LoggedInWelcome';
-import { usePersonnel } from './hooks/usePersonnel'; // Novo hook unificado
+import { usePersonnel } from './hooks/usePersonnel';
 import './App.css';
 
 function AppContent() {
@@ -19,24 +19,22 @@ function AppContent() {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [isPlayerModalOpen, setIsPlayerModalOpen] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
-  const [showEmployeesPage, setShowEmployeesPage] = useState(false);
+  const [showSectorsPage, setShowSectorsPage] = useState(false); // Renomeado para showSectorsPage
   const [showWelcomeBack, setShowWelcomeBack] = useState(true);
 
-  const [selectedCategory, setSelectedCategory] = useState("Sub20");
+  const [selectedCategory, setSelectedCategory] = useState("Especial"); // Categoria padrão para a tela principal
 
-  // Atualizar categoria quando mudar para página de funcionários ou painel admin
+  // Atualizar categoria quando mudar para página de setores ou painel admin
   useEffect(() => {
-    if (showEmployeesPage) {
-      setSelectedCategory("Visitantes"); // Categoria padrão para funcionários
+    if (showSectorsPage) {
+      // Não define categoria padrão aqui, SectorsPage gerencia suas próprias categorias (assignments)
     } else if (!showAdminPanel) {
-      setSelectedCategory("Sub20"); // Categoria padrão para jogadores
+      setSelectedCategory("Especial"); // Categoria padrão para jogadores na tela principal
     }
-  }, [showEmployeesPage, showAdminPanel]);
+  }, [showSectorsPage, showAdminPanel]);
 
-  // Filtrar pessoal para PlayerGrid (Especiais/Agentes)
-  const filteredPlayers = getPersonnelByType(selectedCategory === "Sub20" ? "Agente" : selectedCategory);
-  // Filtrar pessoal para EmployeesPage (Monitores/Setores)
-  const filteredEmployees = getPersonnelByAssignment(selectedCategory);
+  // Filtrar pessoal para PlayerGrid (Especial/Agente)
+  const filteredPlayers = getPersonnelByType(selectedCategory);
 
   const handlePlayerClick = (player) => {
     setSelectedPlayer(player);
@@ -51,22 +49,22 @@ function AppContent() {
   const handleAdminClick = () => {
     setShowAdminPanel(true);
     setShowWelcomeBack(false);
-    setShowEmployeesPage(false);
+    setShowSectorsPage(false);
   };
 
   const handleBackToPublic = () => {
     setShowAdminPanel(false);
     setShowWelcomeBack(false);
-    setShowEmployeesPage(false);
+    setShowSectorsPage(false);
   };
 
   const handleContinueToMain = () => {
     setShowWelcomeBack(false);
-    setShowEmployeesPage(false);
+    setShowSectorsPage(false);
   };
 
-  const handleShowEmployeesPage = () => {
-    setShowEmployeesPage(true);
+  const handleShowSectorsPage = () => { // Renomeado para handleShowSectorsPage
+    setShowSectorsPage(true);
     setShowWelcomeBack(false);
     setShowAdminPanel(false);
   };
@@ -87,10 +85,10 @@ function AppContent() {
   // Se a autenticação ou os dados estiverem carregando, exibe a tela de carregamento
   if (authLoading || personnelLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#E5050F] mx-auto mb-4"></div>
-          <p className="text-gray-600">Carregando...</p>
+          <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-[#E5050F] mx-auto mb-4"></div>
+          <p className="text-gray-600 text-sm sm:text-base">Carregando...</p>
         </div>
       </div>
     );
@@ -104,20 +102,20 @@ function AppContent() {
         onContinue={handleContinueToMain} 
         onAdminClick={handleAdminClick} 
         onLogout={handleLogout}
-        onShowEmployeesPage={handleShowEmployeesPage}
+        onShowSectorsPage={handleShowSectorsPage} // Renomeado
       />
     );
   }
 
   // Se o usuário estiver logado e showAdminPanel for verdadeiro, exibe o painel administrativo
   if (currentUser && showAdminPanel) {
-    return <AdminPanelNew onBackToPublic={handleBackToPublic} />;
+    return <AdminPanel onBackToPublic={handleBackToPublic} />;
   }
 
-  // Se o usuário estiver logado e showEmployeesPage for verdadeiro, exibe a página de funcionários
-  if (currentUser && showEmployeesPage) {
+  // Se o usuário estiver logado e showSectorsPage for verdadeiro, exibe a página de setores
+  if (currentUser && showSectorsPage) {
     return (
-      <EmployeesPageNew 
+      <SectorsPage 
         onAdminClick={handleAdminClick}
         onBackToWelcome={() => setShowWelcomeBack(true)}
       />
@@ -135,20 +133,19 @@ function AppContent() {
         <CategoryMenu 
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
-          // As categorias agora podem ser dinâmicas ou fixas, dependendo do que você quer exibir na tela principal
-          // Por exemplo, se a tela principal for apenas para 'Agentes' e 'Especiais'
-          categories={["Especiais", "Agentes"]}
+          categories={["Especial", "Agente"]} // Categorias padronizadas
+          title="Categorias de Pessoas"
         />
         
         {error && (
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 py-4">
+            <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-3 sm:px-4 py-3 rounded text-sm sm:text-base">
               <p>⚠️ Usando dados de demonstração. {error}</p>
             </div>
           </div>
         )}
         
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <main className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6">
           <PlayerGrid 
             players={filteredPlayers}
             onPlayerClick={handlePlayerClick}
@@ -177,4 +174,5 @@ function App() {
 }
 
 export default App;
+
 

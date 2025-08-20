@@ -1,50 +1,68 @@
-import { 
-  collection, 
-  addDoc, 
-  getDocs, 
-  doc, 
-  updateDoc, 
-  deleteDoc, 
-  query, 
-  where, 
-  orderBy 
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
+  orderBy
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { cloudinaryService } from './cloudinaryService';
 
-// Coleção de jogadores
-const PLAYERS_COLLECTION = 'players';
-
-// Coleção de histórias
+// Coleções
+const AGENTES_COLLECTION = 'agentes';
+const ESPECIAIS_COLLECTION = 'especiais';
 const STORIES_COLLECTION = 'historias';
-
-// Coleção de funcionários
 const EMPLOYEES_COLLECTION = 'funcionarios';
 
-// Operações CRUD para jogadores
+// Função auxiliar para obter a coleção correta
+const getCollectionName = (category) => {
+  if (category === 'Agente') {
+    return AGENTES_COLLECTION;
+  } else if (category === 'Especial') {
+    return ESPECIAIS_COLLECTION;
+  } else {
+    throw new Error('Categoria inválida: ' + category);
+  }
+};
+
+// Operações CRUD para pessoas (Agentes e Especiais)
 export const playersService = {
-  // Buscar todos os jogadores
+  // Buscar todas as pessoas (de ambas as coleções)
   async getAll() {
     try {
-      const querySnapshot = await getDocs(
-        query(collection(db, PLAYERS_COLLECTION), orderBy('name'))
+      const agentesSnapshot = await getDocs(
+        query(collection(db, AGENTES_COLLECTION), orderBy('name'))
       );
-      return querySnapshot.docs.map(doc => ({
+      const especiaisSnapshot = await getDocs(
+        query(collection(db, ESPECIAIS_COLLECTION), orderBy('name'))
+      );
+
+      const agentes = agentesSnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
+      const especiais = especiaisSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+
+      return [...agentes, ...especiais];
     } catch (error) {
-      console.error('Erro ao buscar jogadores:', error);
+      console.error('Erro ao buscar todas as pessoas:', error);
       throw error;
     }
   },
 
-  // Buscar jogadores por categoria
+  // Buscar pessoas por categoria
   async getByCategory(category) {
     try {
+      const collectionName = getCollectionName(category);
       const q = query(
-        collection(db, PLAYERS_COLLECTION),
-        where('category', '==', category),
+        collection(db, collectionName),
         orderBy('name')
       );
       const querySnapshot = await getDocs(q);
@@ -53,46 +71,49 @@ export const playersService = {
         ...doc.data()
       }));
     } catch (error) {
-      console.error('Erro ao buscar jogadores por categoria:', error);
+      console.error(`Erro ao buscar pessoas por categoria ${category}:`, error);
       throw error;
     }
   },
 
-  // Adicionar novo jogador
+  // Adicionar nova pessoa
   async add(playerData) {
     try {
-      const docRef = await addDoc(collection(db, PLAYERS_COLLECTION), {
+      const collectionName = getCollectionName(playerData.category);
+      const docRef = await addDoc(collection(db, collectionName), {
         ...playerData,
         createdAt: new Date(),
         updatedAt: new Date()
       });
       return docRef.id;
     } catch (error) {
-      console.error('Erro ao adicionar jogador:', error);
+      console.error('Erro ao adicionar pessoa:', error);
       throw error;
     }
   },
 
-  // Atualizar jogador
+  // Atualizar pessoa
   async update(id, playerData) {
     try {
-      const playerRef = doc(db, PLAYERS_COLLECTION, id);
+      const collectionName = getCollectionName(playerData.category);
+      const playerRef = doc(db, collectionName, id);
       await updateDoc(playerRef, {
         ...playerData,
         updatedAt: new Date()
       });
     } catch (error) {
-      console.error('Erro ao atualizar jogador:', error);
+      console.error('Erro ao atualizar pessoa:', error);
       throw error;
     }
   },
 
-  // Remover jogador
-  async delete(id) {
+  // Remover pessoa
+  async delete(id, category) {
     try {
-      await deleteDoc(doc(db, PLAYERS_COLLECTION, id));
+      const collectionName = getCollectionName(category);
+      await deleteDoc(doc(db, collectionName, id));
     } catch (error) {
-      console.error('Erro ao remover jogador:', error);
+      console.error('Erro ao remover pessoa:', error);
       throw error;
     }
   }
@@ -353,4 +374,6 @@ export const utils = {
     return cloudinaryService.generateOptimizedUrl(photoData.publicId, options);
   }
 };
+
+
 

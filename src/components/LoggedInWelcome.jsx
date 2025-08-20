@@ -1,7 +1,7 @@
 import { Users, Settings, Shield, LogOut } from 'lucide-react';
 import Footer from './Footer';
 
-const LoggedInWelcome = ({ user, onContinue, onAdminClick, onLogout, onShowEmployeesPage }) => {
+const LoggedInWelcome = ({ user, onContinue, onAdminClick, onLogout, onShowSectorsPage }) => {
   const isAdminUser = user && user.email === 'gestor@inter.com';
 
   return (
@@ -64,7 +64,7 @@ const LoggedInWelcome = ({ user, onContinue, onAdminClick, onLogout, onShowEmplo
               </button>
 
               <button
-                onClick={onShowEmployeesPage}
+                onClick={onShowSectorsPage} // Alterado de onShowEmployeesPage para onShowSectorsPage
                 className="inline-flex items-center justify-center space-x-2 px-6 py-3 bg-[#E5050F] border-2 border-white text-white rounded-md welcome-button hover:bg-white hover:text-[#E5050F] hover:border-[#E5050F] transition-colors text-sm font-semibold min-w-[140px]"
               >
                 <Users size={18} />

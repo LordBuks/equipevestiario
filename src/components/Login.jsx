@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import Footer from './Footer';
@@ -28,25 +28,25 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-between">
-      <main className="flex-grow flex items-center justify-center px-3 sm:px-4 lg:px-6 py-3">
-        <div className="w-full max-w-md">
-          <div className="text-center mb-6">
+      <main className="flex-grow flex items-center justify-center px-3 sm:px-4 lg:px-6 py-6 sm:py-12">
+        <div className="w-full max-w-sm sm:max-w-md">
+          <div className="text-center mb-6 sm:mb-8">
             <img 
               src="https://i.imgur.com/aVevWWG.png" 
               alt="SC Internacional" 
-              className="h-16 w-16 mx-auto mb-4 rounded-full object-contain"
+              className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-3 sm:mb-4 rounded-full object-contain"
             />
-            <h1 className="text-2xl font-bold text-[#E5050F] mb-2">Vestiário</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-[#E5050F] mb-1 sm:mb-2">Vestiário</h1>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-lg font-semibold text-[#E5050F] mb-4 text-center">
+          <div className="bg-white rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-6">
+            <h2 className="text-base sm:text-lg font-semibold text-[#E5050F] mb-4 sm:mb-6 text-center">
               Login
             </h2>
             
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleLogin} className="space-y-4 sm:space-y-5">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                   Email:
                 </label>
                 <input
@@ -54,14 +54,14 @@ const Login = () => {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
                   required
-                  disabled={loading}
+                  placeholder="Digite seu email"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                   Senha:
                 </label>
                 <input
@@ -69,30 +69,47 @@ const Login = () => {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:border-transparent transition-all duration-200"
                   required
-                  disabled={loading}
+                  placeholder="Digite sua senha"
                 />
               </div>
 
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded-md text-sm text-center">
-                  {error}
+                <div className="p-3 sm:p-4 bg-red-50 border-l-4 border-red-400 rounded-r-lg">
+                  <p className="text-red-700 text-sm sm:text-base">{error}</p>
                 </div>
               )}
 
-              <button 
-                type="submit" 
-                className="w-full bg-[#E5050F] text-white py-2 px-4 rounded-md hover:bg-[#C20C18] transition-colors font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
+              <button
+                type="submit"
                 disabled={loading}
+                className="w-full bg-[#E5050F] text-white py-2 sm:py-3 px-4 rounded-lg hover:bg-[#C5040E] focus:outline-none focus:ring-2 focus:ring-[#E5050F] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium text-sm sm:text-base"
               >
-                {loading ? 'Entrando...' : 'Entrar'}
+                {loading ? (
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Entrando...</span>
+                  </div>
+                ) : (
+                  'Entrar'
+                )}
               </button>
             </form>
+
+            <div className="mt-4 sm:mt-6 text-center">
+              <p className="text-xs sm:text-sm text-gray-600">
+                Acesso restrito a administradores
+              </p>
+            </div>
           </div>
+
+          {/* Informações de demonstração - apenas para desenvolvimento */}
+         
         </div>
       </main>
-      <Footer/>
+      
+      <Footer />
     </div>
   );
 };
