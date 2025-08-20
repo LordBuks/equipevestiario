@@ -1,4 +1,4 @@
-import PlayerCard from './PlayerCard';
+import EmployeeCard from './EmployeeCard';
 
 const EmployeeGrid = ({ employees, onEmployeeClick }) => {
   if (employees.length === 0) {
@@ -12,9 +12,9 @@ const EmployeeGrid = ({ employees, onEmployeeClick }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-4">
       {employees.map((employee) => (
-        <PlayerCard 
+        <EmployeeCard 
           key={employee.id} 
-          player={employee} 
+          employee={employee} 
           onClick={onEmployeeClick}
         />
       ))}

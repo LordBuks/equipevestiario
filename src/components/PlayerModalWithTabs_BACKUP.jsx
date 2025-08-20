@@ -139,7 +139,7 @@ const PlayerModalWithTabs = ({ player, isOpen, onClose }) => {
               </div>
             </div>
 
-            {/* Informações do agente - BASEADO NO FORMULÁRIO DE CADASTRO */}
+            {/* Informações do jogador */}
             <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Dados Pessoais */}
               <div className="bg-gray-50 p-4 rounded-lg">
@@ -150,7 +150,7 @@ const PlayerModalWithTabs = ({ player, isOpen, onClose }) => {
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Nome Completo
                     </label>
-                    <p className="text-gray-900 font-medium">{player.fullName || player.name || 'Não informado'}</p>
+                    <p className="text-gray-900 font-medium">{player.fullName || player.name}</p>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -167,80 +167,78 @@ const PlayerModalWithTabs = ({ player, isOpen, onClose }) => {
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Naturalidade
                       </label>
-                      <p className="text-gray-900">{player.birthplace || player.naturalidade || 'Não informada'}</p>
+                      <p className="text-gray-900">{player.birthplace || 'Não informada'}</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Endereço */}
+              {/* Dados Esportivos */}
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Endereço</h3>
-                
-                <div className="space-y-3">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Endereço Completo
-                    </label>
-                    <p className="text-gray-900">{player.address || player.position || 'Não informado'}</p>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      CEP
-                    </label>
-                    <p className="text-gray-900">{player.cep || 'Não informado'}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Registro do Agente */}
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Registro do Agente</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Dados Esportivos</h3>
                 
                 <div className="space-y-3">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Matrícula
+                        Posição
                       </label>
-                      <p className="text-gray-900">{player.registration || player.school || 'Não informada'}</p>
+                      <p className="text-gray-900">{player.position || 'Não informada'}</p>
                     </div>
                     
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Categoria
                       </label>
-                      <p className="text-gray-900">{player.category || 'Especial'}</p>
+                      <p className="text-gray-900">{player.category || 'Não informada'}</p>
                     </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Observações
-                    </label>
-                    <p className="text-gray-900">{player.observations || player.year || 'Não informado'}</p>
                   </div>
                 </div>
               </div>
 
-              {/* Documentação */}
+              {/* Dados Acadêmicos */}
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Documentação</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Dados Acadêmicos</h3>
                 
                 <div className="space-y-3">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        CPF
+                        Escola
                       </label>
-                      <p className="text-gray-900">{player.cpf || player.admissionDate || 'Não informado'}</p>
+                      <p className="text-gray-900">{player.school || 'Não informada'}</p>
                     </div>
                     
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        RG
+                        Ano que Estuda
                       </label>
-                      <p className="text-gray-900">{player.rg || player.room || 'Não informado'}</p>
+                      <p className="text-gray-900">{player.year || 'Não informado'}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dados do Alojamento */}
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Dados do Alojamento</h3>
+                
+                <div className="space-y-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Admissão no Alojamento
+                      </label>
+                      <p className="text-gray-900">
+                        {player.admissionDate ? new Date(player.admissionDate).toLocaleDateString('pt-BR') : 'Não informada'}
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Quarto
+                      </label>
+                      <p className="text-gray-900">{player.room || 'Não informado'}</p>
                     </div>
                   </div>
                 </div>
@@ -252,38 +250,28 @@ const PlayerModalWithTabs = ({ player, isOpen, onClose }) => {
               {/* Observações Médicas */}
               <div className="bg-red-50 p-4 rounded-lg border border-red-200">
                 <h4 className="text-lg font-semibold text-red-800 mb-3">Observações Médicas</h4>
-                <div className="space-y-3">
-                  <div>
-                    <label className="block text-sm font-medium text-red-700 mb-1">
-                      Tipo Sanguíneo e Fator RH
-                    </label>
-                    <p className="text-red-900 font-medium">
-                      {player.bloodType || 'Não informado'}
-                    </p>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-red-700 mb-1">
-                      Alergias e Observações
-                    </label>
-                    <p className="text-red-900">
-                      {player.medicalObservations || 'Nenhuma informada.'}
-                    </p>
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-red-700 mb-1">
+                    Alergias e Observações
+                  </label>
+                  <p className="text-red-900">
+                    {player.medicalObservations || 'Nenhuma informada pela mãe.'}
+                  </p>
                 </div>
               </div>
 
-              {/* Contato de Emergência */}
+              {/* Contato para Emergência */}
               <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                 <h4 className="text-lg font-semibold text-green-800 mb-3">
-                  Contato de Emergência
+                  Contato dos Responsáveis para Emergência
                 </h4>
                 <div className="space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-green-700 mb-1">
-                      Nome do Contato
+                      Nome do Responsável
                     </label>
                     <p className="text-green-900">
-                      {player.emergencyContactName || player.responsibleName || 'Não informado'}
+                      {player.emergencyContactName || 'Não informado'}
                     </p>
                   </div>
                   <div>
@@ -291,7 +279,7 @@ const PlayerModalWithTabs = ({ player, isOpen, onClose }) => {
                       Telefone
                     </label>
                     <p className="text-green-900">
-                      {player.emergencyContactPhone || player.responsiblePhone || 'Não informado'}
+                      {player.emergencyContactPhone || 'Não informado'}
                     </p>
                   </div>
                 </div>
